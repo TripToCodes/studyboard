@@ -29,7 +29,7 @@ def get_posts():
             "id": post.id,
             "title": post.title,
             "content": post.content,
-            "date": post.created_at.strftime("%Y-%m-%d %H:%M:%S"),  # 날짜 포맷 변경
+            "date": post.created_at.strftime("%Y-%m-%d %H:%M"),  # 날짜 포맷 변경
             "author": post.author.username  # user_id 대신 username 반환
         }
             for post in posts],
@@ -43,7 +43,7 @@ def get_posts():
 @bp.route("/board/posts/<int:post_id>", methods=["GET"])
 def get_post(post_id):
     post = Post.query.get_or_404(post_id)
-    return jsonify({"id": post.id, "title": post.title, "content": post.content, "user_id": post.user_id})
+    return jsonify({"id": post.id, "title": post.title, "content": post.content, "user_id": post.user_id, "date": post.created_at.strftime("%Y-%m-%d %H:%M"), "author": post.author.username})
 
 # ✅ Create a new post
 
